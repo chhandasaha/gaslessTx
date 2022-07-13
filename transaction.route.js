@@ -9,4 +9,7 @@ const transaction_controller = require('./transaction.controller');
 
 router.post('/transaction', transaction_controller.transfer);
 
+//router.post('/transaction_status', transaction_controller.transactionStatus);
+router.post('/account_balance', transaction_controller.checkBalance);
+
 module.exports = router;

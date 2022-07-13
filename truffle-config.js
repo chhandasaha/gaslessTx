@@ -1,4 +1,8 @@
-const HDWalletProvider = require("@truffle/hdwallet-provider")
+//const HDWalletProvider = require("@truffle/hdwallet-provider")
+const Provider = require("@truffle/hdwallet-provider");
+const address = '0xe634d62E3c78412165DAcc9547BC0CbFA239a54B';
+const privateKey = 'e30495872ee88d814739adeaf0fdd8841675ad7969815c8db4de3e38dc7849f5';
+const provider = new Provider (privateKey, 'https://rinkeby.infura.io/v3/ed40d244d07b4beba6246525ad60917b')
 /**
  * Use this file to configure your truffle project. It's seeded with some
  * common settings for different networks and features like migrations,
@@ -63,12 +67,14 @@ module.exports = {
     // },
     // Useful for deploying to a public network.
     // NB: It's important to wrap the provider as a function.
+    //rinkeby: {
+    // provider: () => new HDWalletProvider({
+    //   privateKeys: private_keys,
+    //   providerOrUrl: "https://rinkeby.infura.io/v3/ed40d244d07b4beba6246525ad60917b",
+    //   numberOfAddresses: 2
+    // }),
     rinkeby: {
-    provider: () => new HDWalletProvider({
-      privateKeys: private_keys,
-      providerOrUrl: "https://rinkeby.infura.io/v3/ed40d244d07b4beba6246525ad60917b",
-      numberOfAddresses: 2
-    }),
+      provider: () => provider,
     network_id: 4,       // Ropsten's id
     gas: 5500000,        // Ropsten has a lower block limit than mainnet
     confirmations: 2,    // # of confs to wait between deployments. (default: 0)

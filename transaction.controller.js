@@ -46,7 +46,8 @@ exports.checkBalance = async function(req, res){
 
 const web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/v3/ed40d244d07b4beba6246525ad60917b"))
 
-const getBal = await web3.eth.getBalance(address, function(err, result) {
+//const getBal = await web3.eth.getBalance(address, function(err, result) {
+  const getBal = await web3.eth.getBalance(req.body.walletAddress, function(err, result) {
   if (err) {
     console.log(err)
   } else {
@@ -65,7 +66,7 @@ const getBal = await web3.eth.getBalance(address, function(err, result) {
 //to get token balance in rinkeby
 exports.checkTknBalance = async function(req, res){
 const web3 = new Web3(infuraUrl)
-let tokenAddress = "0x54cd8339239d6428076fD36129c5E9aB92D936aD";
+//let tokenAddress = "0x54cd8339239d6428076fD36129c5E9aB92D936aD";
 
 // The minimum ABI to get ERC20 Token balance
 let minABI = [
@@ -87,9 +88,11 @@ let minABI = [
   }
 ];
 
-let contract = new web3.eth.Contract(minABI,tokenAddress);
+//let contract = new web3.eth.Contract(minABI,tokenAddress);
+let contract = new web3.eth.Contract(minABI,req.body.tokenAddress);
 async function getBalance() {
-  balance = await contract.methods.balanceOf(address).call();
+  //balance = await contract.methods.balanceOf(address).call();
+  balance = await contract.methods.balanceOf(req.body.walletAddress).call();
   return balance;
 }
 getBalance().then(function (balance) {
